@@ -18,7 +18,8 @@ Dont Worry My Code Will Have My Heart Beat Tech. Each Peice of Code When Run Wil
 5. Get Cheap Fuel
 6. Save Money
 
- ![alt text]https://img.shields.io/endpoint?url=https://waka.hackclub.com/api/compat/shields/v1/U088V2C21AB/interval:all_time&label=All%20time&color=blue
+
+ <img src="https://img.shields.io/endpoint?url=https://waka.hackclub.com/api/compat/shields/v1/U088V2C21AB/interval:all_time&label=All%20time&color=blue">
  ![alt text]https://waka.hackclub.com/api/badge/U088V2C21AB/U088V2C21AB/interval:30_days?label=last%2030d
  ![alt text]https://waka.hackclub.com/api/badge/U088V2C21AB/interval:today?label=today
  ![alt text]https://github-readme-stats.vercel.app/api/wakatime?username=U088V2C21AB&api_domain=waka.hackclub.com&bg_color=1A202C&title_color=2F855A&icon_color=2F855A&text_color=ffffff&custom_title=Wakapi%20Week%20Stats&layout=compact
