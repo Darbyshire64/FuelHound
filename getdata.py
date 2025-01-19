@@ -4,7 +4,9 @@ import time
 
 # Get data from the API's
 
-
+class HeartBeat:
+    def HeartBeat():
+        return ("GetDataModule: Good to go")
 class GetData:
     def Sainsburys():
         url = "https://api.sainsburys.co.uk/v1/exports/latest/fuel_prices_data.json"
@@ -96,6 +98,22 @@ class GetData:
             return None
     def Motor():
         url = "https://fuel.motorfuelgroup.com/fuel_prices_data.json"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            return json.dumps(data, indent=4)
+        else:
+            return None
+    def RonTec():
+        url = "https://www.rontec-servicestations.co.uk/fuel-prices/data/fuel_prices_data.json"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            return json.dumps(data, indent=4)
+        else:
+            return None
+    def SGN():
+        url = "https://www.sgnretail.uk/files/data/SGN_daily_fuel_prices.json"
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
