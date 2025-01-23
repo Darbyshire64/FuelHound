@@ -31,8 +31,8 @@ The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I 
 # Instructions
 
 1. Download The Latest Release Package.
-2. Run Setup.py to Setup dependencies.
-3. Run CheapFuel.py
+2. Install the Requests Package
+3. Run TerminalSearch.py
 4. Get In Car
 5. Get Cheap Fuel
 6. Save Money
