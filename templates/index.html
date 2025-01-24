@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Hound</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-of-service">Terms of Service</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Fuel Hound</h1>
+            <p>Find the cheapest fuel near you!</p>
+        </header>
+        
+        <form method="POST">
+            <input type="text" name="postcode" placeholder="Enter your postcode" required>
+            <br>
+            <label>
+                <input type="checkbox" name="agree" required> I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a>.
+            </label>
+            <br>
+            <button type="submit">Find Fuel</button>
+        </form>
+
+        {% if postcode %}
+        <div class="results">
+            <h2>Fuel Prices for {{ postcode }}</h2>
+            <ul>
+                <li>Petrol: £{{ prices.petrol }}</li>
+                <li>Diesel: £{{ prices.diesel }}</li>
+                <li>LPG: £{{ prices.lpg }}</li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
+            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a  SubProject of <a href="https://dynapound.com">DynaPound</a> </P>
+            <p><a href="/privacy-policy">Privacy Policy</a> - <a href="/terms-of-service">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>
