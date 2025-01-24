@@ -24,18 +24,16 @@ Dont Worry My Code Will Have My Heart Beat Tech. Each Peice of Code When Run Wil
 The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I Should Not Be Held Liable For Incorrect Data. Any Damage Or Malfunction To Your System CAUSED By My Software or While Using My Software is not my fault. All Data is obtainied leaglay Via The Bellow Mention Links. Use The Software at Your Own Risk. Do not run the software to many times a minute. around 5 times a minute is good. I am not liable for any leagle issues caused by the use of this program. by downloading an running the software you agree to this.
 
 # TODO
- - Organise Code
- - Build Web Version
- - Submit to High Seas
+ - Finalise and rlease Web Version
  - Fix Tesco
 # Instructions
 
+Ensure Python 3.11 is correctly installed and configured i cannot garentee stability for other version's and am not liable for any damage.
+
 1. Download The Latest Release Package.
-2. Run Setup.py to Setup dependencies.
-3. Run CheapFuel.py
-4. Get In Car
-5. Get Cheap Fuel
-6. Save Money
+2. Install Requrimetns.txt (flask is only required for the web version)
+3. Run Terminalsearch.py
+4. Folllow On Screen Prompts
 
 # Time Wasted
  <img src="https://img.shields.io/endpoint?url=https://waka.hackclub.com/api/compat/shields/v1/U088V2C21AB/interval:all_time&label=All%20time&color=blue">
