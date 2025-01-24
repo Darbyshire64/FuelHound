@@ -29,6 +29,8 @@ The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I 
 Ensure Python 3.11 is correctly installed and configured i cannot garentee stability for other version's and am not liable for any damage.
 
 1. Download The Latest Release Package.
+2. Install the Requests Package
+3. Run TerminalSearch.py
 2. Install Requrimetns.txt (flask is only required for the web version)
 3. Run Terminalsearch.py
 4. Folllow On Screen Prompts
