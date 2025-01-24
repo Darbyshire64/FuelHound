@@ -1,7 +1,5 @@
 # FuelHound
-A Terminal Applet To Search For The Cheapest Fuel Prices Across The UK. Data Sourced From https://www.gov.uk/guidance/access-fuel-price-data#contents. Currently in a DO NOT Use State. The Code Is Not in a prodution ready enviroment. 
-Corupted Files?
-Dont Worry My Code Will Have My Heart Beat Tech. Each Peice of Code When Run Will Call a Function from the requeid secondary files. witch will return a set of data if this data is correct the code will continue. if not it will download the code. ensureing youll always have the necersay files. At this Point in time Tesco Is Broken and Requests Cannot Be Made The Program only Supports The following Brands.
+A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The UK. Data Sourced From https://www.gov.uk/guidance/access-fuel-price-data#contents. The Code is In a Stable Version
 
  - AppleGreen UK
  - Ascona Group
@@ -21,10 +19,10 @@ Dont Worry My Code Will Have My Heart Beat Tech. Each Peice of Code When Run Wil
 
 # IMPORTANT
 
-The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I Should Not Be Held Liable For Incorrect Data. Any Damage Or Malfunction To Your System CAUSED By My Software or While Using My Software is not my fault. All Data is obtainied leaglay Via The Bellow Mention Links. Use The Software at Your Own Risk. Do not run the software to many times a minute. around 5 times a minute is good. I am not liable for any leagle issues caused by the use of this program. by downloading an running the software you agree to this.
+The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I Should Not Be Held Liable For Incorrect Data. Any Damage Or Malfunction To Your System CAUSED By My Software or While Using My Software is not my fault. All Data is obtainied leaglay Via The Bellow Mention Links. Use The Software at Your Own Risk. Do not run the software to many times a minute. around 5 times a minute is good. I am not liable for any leagle issues caused by the use of this program. by downloading an running the software you agree to this. The WebVersion is not ready for user deployment.
 
 # TODO
- - Finalise and rlease Web Version
+ - Finalise and Deploy Web Version
  - Fix Tesco
 # Instructions
 
