@@ -21,10 +21,10 @@
             <h1>Fuel Hound</h1>
             <p>Find the cheapest fuel near you quickly and securely!</p>
         </header>
-        
         <!-- Form Section -->
         <form method="POST" action="/" id="postcode-form">
             <label for="postcode-input">Enter your postcode:</label>
+            <br>
             <input type="text" name="postcode" id="postcode-input" placeholder="Enter postcode" value="{{ postcode or '' }}" required>
             <div>
                 <label>
@@ -32,6 +32,8 @@
                     I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a>.
                 </label>
             </div>
+            <br>
+            <br>
             <button type="submit">Find Fuel</button>
         </form>
         <!-- Spinner -->
@@ -52,7 +54,7 @@
                         <li>
                             <strong>{{ fuel_type }}:</strong>
                             {% if station %}
-                                {{ station.brand }}, {{ station.address }}, {{ station.postcode }} - £{{ "%.2f"|format(station.price) }} 
+                                {{ station.brand }}, {{ station.address }}, {{ station.postcode }} - £{{ "%.2f"|format(station.price) }}/litre 
                                 (<a href="{{ station.google_maps_link }}" target="_blank">Directions</a>)
                             {% else %}
                                 No station found.
@@ -62,13 +64,13 @@
                 </ul>
                 <h3>Average Prices</h3>
                 <p><strong>Local:</strong></p>
-                <p>E10: £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }},</p> 
-                <p>E5: £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}</p>
-                <p>B7: £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}</p>
+                    <p>     E10: £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }}/litre</p> 
+                    <p>     E5: £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}/litre</p>
+                    <p>     B7: £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}/litre</p>
                 <p><strong>National:</strong></p>
-                <p> E10: £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}</p>
-                <p>E5: £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}</p>
-                <p>B7: £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}</p>
+                    <p>     E10: £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}/litre</p>
+                    <p>     E5: £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}/litre</p>
+                    <p>     B7: £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}/litre</p>
             </div>
         {% endif %}
     </div>
@@ -84,7 +86,8 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 Fuel Hound. All rights reserved.</p>
+            <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
+            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a  SubProject of <a href="https://dynapound.com">DynaPound</a> </P>
             <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
         </div>
     </footer>

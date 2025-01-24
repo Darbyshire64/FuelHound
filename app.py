@@ -8,6 +8,8 @@ app.secret_key = 'TeeheheNotGivingUThis'  # Ensure this is a secure, random key 
 
 #2
 
+
+
 def extract_outward_code(postcode):
     """
     Extracts the outward code (first segment) from a full postcode.
@@ -25,7 +27,6 @@ def extract_outward_code(postcode):
     parts = postcode.strip().upper().split(" ")
     return parts[0] if parts else None
 
-# Function to fetch the cheapest fuel (using a dummy API for now)
 def get_cheapest_fuel(postcode):
     totalping = 0
     successping = 0
@@ -69,9 +70,12 @@ def get_cheapest_fuel(postcode):
 
     for station in matching_stations:
         for fuel_type in ['E10', 'E5', 'B7']:
-            if fuel_type in station['prices'] and station['prices'][fuel_type] < cheapest_prices[fuel_type]:
-                cheapest_prices[fuel_type] = station['prices'][fuel_type]
-                cheapest_stations[fuel_type] = station
+            if fuel_type in station['prices']:
+                # Convert prices from pennies to pounds
+                price_in_pounds = station['prices'][fuel_type] / 100
+                if price_in_pounds < cheapest_prices[fuel_type]:
+                    cheapest_prices[fuel_type] = price_in_pounds
+                    cheapest_stations[fuel_type] = station
 
     # Calculate average prices
     local_prices = {'E10': [], 'E5': [], 'B7': []}
@@ -80,12 +84,12 @@ def get_cheapest_fuel(postcode):
     for station in matching_stations:
         for fuel_type in ['E10', 'E5', 'B7']:
             if fuel_type in station['prices']:
-                local_prices[fuel_type].append(station['prices'][fuel_type])
+                local_prices[fuel_type].append(station['prices'][fuel_type] / 100)
 
     for station in processed_data.get('stations', []):
         for fuel_type in ['E10', 'E5', 'B7']:
             if fuel_type in station['prices']:
-                national_prices[fuel_type].append(station['prices'][fuel_type])
+                national_prices[fuel_type].append(station['prices'][fuel_type] / 100)
 
     local_avg_prices = {fuel_type: (sum(prices) / len(prices)) if prices else None for fuel_type, prices in local_prices.items()}
     national_avg_prices = {fuel_type: (sum(prices) / len(prices)) if prices else None for fuel_type, prices in national_prices.items()}
@@ -100,7 +104,7 @@ def get_cheapest_fuel(postcode):
                 "brand": station["brand"],
                 "address": station["address"],
                 "postcode": station["postcode"],
-                "price": station["prices"][fuel_type],
+                "price": cheapest_prices[fuel_type],  # Price already in pounds
                 "google_maps_link": f"https://www.google.com/maps/dir/?api=1&destination={station['location']['latitude']},{station['location']['longitude']}",
             } if station else None
             for fuel_type, station in cheapest_stations.items()
@@ -111,6 +115,7 @@ def get_cheapest_fuel(postcode):
         },
     }
     return response
+#1
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -144,4 +149,4 @@ def terms_of_service():
     return render_template('terms-of-service.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
