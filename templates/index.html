@@ -19,37 +19,73 @@
     <div class="container">
         <header>
             <h1>Fuel Hound</h1>
-            <p>Find the cheapest fuel near you!</p>
+            <p>Find the cheapest fuel near you quickly and securely!</p>
         </header>
         
-        <form method="POST">
-            <input type="text" name="postcode" placeholder="Enter your postcode" required>
-            <br>
-            <label>
-                <input type="checkbox" name="agree" required> I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a>.
-            </label>
-            <br>
+        <!-- Form Section -->
+        <form method="POST" action="/" id="postcode-form">
+            <label for="postcode-input">Enter your postcode:</label>
+            <input type="text" name="postcode" id="postcode-input" placeholder="Enter postcode" value="{{ postcode or '' }}" required>
+            <div>
+                <label>
+                    <input type="checkbox" name="agree" required> 
+                    I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a>.
+                </label>
+            </div>
             <button type="submit">Find Fuel</button>
         </form>
+        <!-- Spinner -->
+        <div class="spinner" id="loading-spinner"></div>
+        <!-- Error Message -->
 
-        {% if postcode %}
-        <div class="results">
-            <h2>Fuel Prices for {{ postcode }}</h2>
-            <ul>
-                <li>Petrol: £{{ prices.petrol }}</li>
-                <li>Diesel: £{{ prices.diesel }}</li>
-                <li>LPG: £{{ prices.lpg }}</li>
-            </ul>
-        </div>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <!-- Results Section -->
+        {% if prices %}
+            <div id="results">
+                <h2>Results for Postcode: {{ postcode }}</h2>
+                <h3>Cheapest Stations</h3>
+                <ul>
+                    {% for fuel_type, station in prices.cheapest_stations.items() %}
+                        <li>
+                            <strong>{{ fuel_type }}:</strong>
+                            {% if station %}
+                                {{ station.brand }}, {{ station.address }}, {{ station.postcode }} - £{{ "%.2f"|format(station.price) }} 
+                                (<a href="{{ station.google_maps_link }}" target="_blank">Directions</a>)
+                            {% else %}
+                                No station found.
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <h3>Average Prices</h3>
+                <p><strong>Local:</strong></p>
+                <p>E10: £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }},</p> 
+                <p>E5: £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}</p>
+                <p>B7: £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}</p>
+                <p><strong>National:</strong></p>
+                <p> E10: £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}</p>
+                <p>E5: £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}</p>
+                <p>B7: £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}</p>
+            </div>
         {% endif %}
     </div>
+    <script>
+        const form = document.getElementById('postcode-form');
+        const spinner = document.getElementById('loading-spinner');
 
+        form.addEventListener('submit', () => {
+            spinner.style.display = 'block'; // Show spinner
+            form.classList.add('loading'); // Add loading state
+        });
+    </script>
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
-            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a  SubProject of <a href="https://dynapound.com">DynaPound</a> </P>
-            <p><a href="/privacy-policy">Privacy Policy</a> - <a href="/terms-of-service">Terms of Service</a></p>
+            <p>&copy; 2025 Fuel Hound. All rights reserved.</p>
+            <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
         </div>
     </footer>
 </body>

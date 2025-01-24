@@ -1,36 +1,11 @@
-from flask import Flask, render_template, request, session, redirect, url_for
-import requests  # For fetching external data
-import getdata # For fetching external data
-import json 
+import json
+import getdata
 
-app = Flask(__name__)
-app.secret_key = 'TeeheheNotGivingUThis'  # Ensure this is a secure, random key for session encryption
-
-#2
-
-def extract_outward_code(postcode):
-    """
-    Extracts the outward code (first segment) from a full postcode.
-
-    Args:
-        postcode (str): The full UK postcode, e.g., 'RG14 5PA'.
-
-    Returns:
-        str: The outward code, e.g., 'RG14', or None if the input is invalid.
-    """
-    if not postcode:
-        return None
-
-    # Split by space and return the first segment
-    parts = postcode.strip().upper().split(" ")
-    return parts[0] if parts else None
-
-# Function to fetch the cheapest fuel (using a dummy API for now)
-def get_cheapest_fuel(postcode):
+def search_and_match_stations(postal, getdata):
     totalping = 0
     successping = 0
     match = 0
-    postcode = extract_outward_code(postcode)
+
     # List of fuel providers and their methods
     fuel_providers = [
         ("Sainsbury's", getdata.GetData.Sainsburys),
@@ -58,7 +33,7 @@ def get_cheapest_fuel(postcode):
             processed_data = json.loads(data)
             for site in processed_data.get('stations', []):
                 site_postal = site['postcode'].split(' ')[0]
-                if site_postal == postcode:
+                if site_postal == postal:
                     matching_stations.append(site)
                     match += 1
             successping += 1
@@ -110,38 +85,10 @@ def get_cheapest_fuel(postcode):
             "national": national_avg_prices,
         },
     }
-    return response
 
-@app.route("/", methods=["GET", "POST"])
-def home():
-    # Always clear session data on GET request (i.e., on refresh)
-    session.clear()  # Clears all session data
-    
-    # Check if the form is being submitted
-    if request.method == "POST":
-        postcode = request.form.get("postcode")
-        agree = request.form.get("agree")  # Check if user agreed to terms
-        if not agree:
-            return render_template("index.html", error="You must agree to the Privacy Policy and Terms of Service.")
-        
-        prices = get_cheapest_fuel(postcode)
-        
-        # Store the postcode and prices in the session for the user
-        session['postcode'] = postcode
-        session['prices'] = prices
-        
-        return render_template("index.html", postcode=postcode, prices=prices)
+    return json.dumps(response, indent=2)
 
-    # If the page is accessed with a GET request (i.e., on refresh), no prices or postcode should be shown
-    return render_template("index.html", postcode=None, prices=None)
-
-@app.route('/privacy-policy')
-def privacy_policy():
-    return render_template('privacy-policy.html')
-
-@app.route('/terms-of-service')
-def terms_of_service():
-    return render_template('terms-of-service.html')
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# Example usage
+postal_code = "RG14"  # Replace with the desired postal code
+response = search_and_match_stations(postal_code, getdata)
+print(response)
