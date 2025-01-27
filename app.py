@@ -3,10 +3,12 @@ import requests  # For fetching external data
 import getdata # For fetching external data
 import json 
 
+#Updated:
+# Index.html
+#w
+
 app = Flask(__name__)
 app.secret_key = 'TeeheheNotGivingUThis'  # Ensure this is a secure, random key for session encryption
-
-#2
 
 
 
@@ -136,12 +138,10 @@ def home():
         session['prices'] = prices
         
         return render_template("index.html", postcode=postcode, prices=prices)
-
-    # If the page is accessed with a GET request (i.e., on refresh), no prices or postcode should be shown
-    return render_template("index.html", postcode=None, prices=None)
+    return render_template("index.html")
 
 
-@app.route('/api/v1/fueldata/postcode/<str:postcode>', methods=['GET','POST'])
+@app.route('/api/v1/fueldata/postcode/<string:postcode>', methods=['GET','POST'])
 def FuelApi(postcode):
     if request.method == "POST":
         dataOut = get_cheapest_fuel(postcode)
