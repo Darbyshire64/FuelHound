@@ -140,6 +140,14 @@ def home():
     # If the page is accessed with a GET request (i.e., on refresh), no prices or postcode should be shown
     return render_template("index.html", postcode=None, prices=None)
 
+
+@app.route('/api/v1/fueldata/postcode/<str:postcode>', methods=['GET','POST'])
+def FuelApi(postcode):
+    if request.method == "POST":
+        dataOut = get_cheapest_fuel(postcode)
+        return dataOut
+
+
 @app.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy-policy.html')
@@ -149,4 +157,4 @@ def terms_of_service():
     return render_template('terms-of-service.html')
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
