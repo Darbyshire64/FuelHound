@@ -141,11 +141,11 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/api/v1/fueldata/postcode/<string:postcode>', methods=['GET','POST'])
+@app.route('/api/v1/fueldata/postcode/<string:postcode>', methods=['POST'])
 def FuelApi(postcode):
     if request.method == "POST":
         dataOut = get_cheapest_fuel(postcode)
-        return dataOut
+        return json.dump(dataOut)
 
 
 @app.route('/privacy-policy')
