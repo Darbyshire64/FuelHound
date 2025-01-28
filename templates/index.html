@@ -64,13 +64,13 @@
                 </ul>
                 <h3>Average Prices</h3>
                 <p><strong>Local:</strong></p>
-                    <p>     E10: £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }}/litre</p> 
-                    <p>     E5: £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}/litre</p>
-                    <p>     B7: £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}/litre</p>
+                    <p>     E10(Unleaded): £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }}/litre</p> 
+                    <p>     E5(Premium Unleaded): £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}/litre</p>
+                    <p>     B7(Diesil): £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}/litre</p>
                 <p><strong>National:</strong></p>
-                    <p>     E10: £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}/litre</p>
-                    <p>     E5: £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}/litre</p>
-                    <p>     B7: £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}/litre</p>
+                    <p>     E10(Unleaded): £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}/litre</p>
+                    <p>     E5(Premium Unleaded): £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}/litre</p>
+                    <p>     B7(Diesel): £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}/litre</p>
             </div>
         {% endif %}
     </div>
