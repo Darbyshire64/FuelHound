@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 import requests  # For fetching external data
 import getdata # For fetching external data
 import json 
@@ -141,11 +141,11 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/api/v1/fueldata/postcode/<string:postcode>', methods=['POST'])
-def FuelApi(postcode):
-    if request.method == "POST":
-        dataOut = get_cheapest_fuel(postcode)
-        return json.dump(dataOut)
+#Api
+@app.route('/api/cheapest/postcode/<postcode>', methods=['GET'])
+def cheapest_fuel(postcode):
+    price = get_cheapest_fuel(postcode)
+    return jsonify(price)
 
 
 @app.route('/privacy-policy')
@@ -157,4 +157,4 @@ def terms_of_service():
     return render_template('terms-of-service.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=44751)
