@@ -5,8 +5,32 @@ import time
 # Get data from the API's
 
 class HeartBeat:
-    def HeartBeat():
-        return ("GetDataModule: Good to go")
+    def InternetCheck():
+        google_response = requests.get("https://google.com")
+        if google_response.status_code == 200:
+            return True
+        else:
+            return False
+        microsoft_response = requests.get("https://microsoft.com")
+        if microsoft_response.status_code == 200:
+            return True
+        else:
+            return False
+        apple_response = requests.get("https://apple.com")
+        if apple_response.status_code == 200:
+            return True
+        else:
+            return False
+        amazon_response = requests.get("https://amazon.com")
+        if amazon_response.status_code == 200:
+            return True
+        else:
+            return False
+        facebook_response = requests.get("https://facebook.com")
+        if facebook_response.status_code == 200:
+            return True
+        else:
+            return False
 class GetData:
     def Sainsburys():
         url = "https://api.sainsburys.co.uk/v1/exports/latest/fuel_prices_data.json"

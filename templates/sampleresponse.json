@@ -1,0 +1,40 @@
+{
+    "average_prices": {
+      "local": {
+        "B7": 1.464,
+        "E10": 1.4165,
+        "E5": 1.5523333333333333
+      },
+      "national": {
+        "B7": 1.4626538461538456,
+        "E10": 1.3880384615384618,
+        "E5": 1.5997070707070704
+      }
+    },
+    "cheapest_stations": {
+      "B7": {
+        "address": "Hectors Way",
+        "brand": "Sainsbury's",
+        "google_maps_link": "https://www.google.com/maps/dir/?api=1&destination=51.39904,-1.31823",
+        "postcode": "RG14 5AB",
+        "price": 1.439
+      },
+      "E10": {
+        "address": "Hectors Way",
+        "brand": "Sainsbury's",
+        "google_maps_link": "https://www.google.com/maps/dir/?api=1&destination=51.39904,-1.31823",
+        "postcode": "RG14 5AB",
+        "price": 1.399
+      },
+      "E5": {
+        "address": "Hectors Way",
+        "brand": "Sainsbury's",
+        "google_maps_link": "https://www.google.com/maps/dir/?api=1&destination=51.39904,-1.31823",
+        "postcode": "RG14 5AB",
+        "price": 1.5190000000000001
+      }
+    },
+    "matching_stations_found": 4,
+    "successful_requests": 13,
+    "total_companies": 14
+  }
