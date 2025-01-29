@@ -7,7 +7,7 @@ A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The 
  - Esso Tesco
  - JET Retail UK
  - Karan Retail Ltd
- - Morrisons
+ - Morrisons - Morrisons Apears To Be Offline The Cause is Unkown. The Software still requests to morrisons this causes the self tests to report the api test as failed please ingore this
  - Moto
  - Motor Fuel Group
  - Rontec
@@ -21,11 +21,10 @@ A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The 
 The Data Obtained By My Program Should Not Be Sold or used for finacial gain. I Should Not Be Held Liable For Incorrect Data. Any Damage Or Malfunction To Your System CAUSED By My Software or While Using My Software is not my fault. All Data is obtainied leaglay Via The Bellow Mention Links. Use The Software at Your Own Risk. Do not run the software to many times a minute. around 5 times a minute is good. I am not liable for any leagle issues caused by the use of this program. by downloading an running the software you agree to this. The WebVersion is not ready for user deployment.
 
 # TODO
- - Finish Deploy API.
- - Improve Website Interface
+ - Finish & Deploy API.
  - Add Leaflet Intergration
  - Add Show All Fuel Prices
- - Add Auto Deploy software
+ - Redsign UI
  - Fix Tesco
 # Instructions
 
