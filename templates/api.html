@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Fuel Hound</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-of-service">Terms of Service</a></li>
+            <li><a href="/api/doc">API </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>API Documentation</h1>
+        <p>The Fuel Hound API allows you to access fuel price data programmatically. You can use this data to build your own applications, websites, or services that require fuel price information.</p>
+        <h1>Getting Started</h1>
+        <p>Currently the FuelHound API is Limited and Only allows for reciving the cheapest stations and averages. Its Quite Simple To Use All you need to do is send a Get Request to</P>
+        <code>https://lawri.hackclub.app/api/cheapest/postcode/RG14</code>
+        <p>Replace RG14 With the actual first half of your postcode. response should be a json request simlar to the one availble at <code><a href="https://lawri.hackclub.app/api/samplejson">https://lawri.hackclub.app/api/samplejson</a></code></p>
+    </div>
+
+     <!-- Footer -->
+     <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
+            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a Sub Project of <a href="https://dynapound.com">DynaPound</a> </P>
+            <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
+        </div>
+    </footer>
+</body>
+</html>

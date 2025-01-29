@@ -1,14 +1,85 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-import requests  # For fetching external data
-import getdata # For fetching external data
+from flask import Flask, render_template, request, session, jsonify
+import getdata 
 import json 
 
-#Updated:
-# Index.html
-#
+# Run Self Tests
+print("Checking Dependecies")
+if getdata:
+    print("Getdata module is installed")
+else:
+    print("Getdata module are not installed")
+    exit("Please install the Getdata module")
+
+if json:
+    print("Json module is installed")
+else:
+    print("Json module are not installed")
+    exit("Please install the Json module")
+
+if Flask:
+    print("Flask module is installed")
+else:
+    print("Flask module are not installed")
+    exit("Please install the Flask module")
+if render_template:
+    print("Render_template module is installed")
+else:
+    print("Render_template module are not installed")
+    exit("Please install the Render_template module")
+if jsonify:
+    print("Jsonify module is installed")
+else:
+    print("Jsonify modules are not installed")
+    exit("Please install the Jsonify module")
+print("All Dependecies are installed")
+print("Running Internet Acccess Test")
+
+internet = getdata.HeartBeat.InternetCheck()
+if internet == True:
+    print("Internet Access Test Passed")
+else:
+    print("Internet Access Test Failed")
+    print("Please check your internet connection")
+    exit("No internet connection")
+print("Running API Test")
+try:
+    postcode = 'RG14'
+    fuel_providers = [
+        ("Sainsbury's", getdata.GetData.Sainsburys),
+        ("Shell", getdata.GetData.Shell),
+        ("AppleGreen", getdata.GetData.AppleGreen),
+        ("Ascona", getdata.GetData.Ascona),
+        ("Asda", getdata.GetData.Asda),
+        ("BP", getdata.GetData.BP),
+        ("Esso Tesco", getdata.GetData.ET),
+        ("Jet", getdata.GetData.Jet),
+        ("Karen", getdata.GetData.Karen),
+        ("Morrisons", getdata.GetData.Morisons),
+        ("Moto", getdata.GetData.Moto),
+        ("Motor", getdata.GetData.Motor),
+        ("Rontec", getdata.GetData.RonTec),
+        ("SGN", getdata.GetData.SGN),
+    ]
+
+    matching_stations = []
+    for name, get_method in fuel_providers:
+        try:
+            data = get_method()
+        except:
+            error = Exception
+        if data is not None:
+            print(name, "API Test Passed")
+        else:
+            print(name, "API Test Failed")
+            print(error)
+except:
+    print("API Test Failed")
+    print("Contuining with limited functionality/No functionality")
+    print("Bugs may occur")
+    print("SOFTWARE IS UNSTABLE DO NOT USE")
 
 app = Flask(__name__)
-app.secret_key = 'TeeheheNotGivingUThis'  # Ensure this is a secure, random key for session encryption
+app.secret_key = 'TeeheheNotGivingUThis'
 
 
 
@@ -151,10 +222,15 @@ def cheapest_fuel(postcode):
 @app.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy-policy.html')
-
 @app.route('/terms-of-service')
 def terms_of_service():
     return render_template('terms-of-service.html')
+@app.route('/api/doc')
+def api():
+    return render_template('api.html')
+@app.route('/api/samplejson')
+def samplejson():
+    return render_template('sampleresponse.json')
 
 if __name__ == "__main__":
     app.run(debug=True, port=44751)
