@@ -3,6 +3,8 @@ import getdata
 import json 
 import os
 
+#Updated With New announcment Data
+
 # Run Self Tests
 print("Checking Dependecies")
 if getdata:
