@@ -354,7 +354,7 @@ for fuel_type, station in cheapest_stations.items():
         latitude = station['location']['latitude']
         longitude = station['location']['longitude']
         google_maps_link = f"https://www.google.com/maps/dir/?api=1&destination={latitude},{longitude}"
-        print(f"  Google Maps Link: {google_maps_link}")
+        print("  Google Maps Link is available.")
         
         # Print average prices and comparison with the cheapest station
         cheapest_price = station['prices'][fuel_type]
