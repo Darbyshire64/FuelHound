@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, jsonify
 import getdata 
 import json 
+import os
 
 # Run Self Tests
 print("Checking Dependecies")
@@ -233,4 +234,5 @@ def samplejson():
     return render_template('sampleresponse.json')
 
 if __name__ == "__main__":
-    app.run(debug=True, port=44751)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() in ['true', '1', 't']
+    app.run(debug=debug_mode, port=44751)
