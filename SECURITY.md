@@ -12,8 +12,8 @@ Currently Only the latest Production Deployment is Updated.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please Report Isseues on the Git Hub Issues Page Please Mark them with the Security tag. Excpect a Fix To Be Released To Production in Two Weeks of your Security Bug Being Valitaed.
+Please Do not submit bogus requsts
+Please Do submit actual Security Concerncs
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Please Understand some securty requests maybye de prioritsed due to them being minor concers.
