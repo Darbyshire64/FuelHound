@@ -1,5 +1,5 @@
 # FuelHound
-A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The UK. Data Sourced From https://www.gov.uk/guidance/access-fuel-price-data#contents. The Code is In a Stable Version access the web version at lawri.hackclub.app.  
+A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The UK. Data Sourced From https://www.gov.uk/guidance/access-fuel-price-data#contents. The Code is In a Stable Version access the web version at https://lawri.hackclub.app.  
  - AppleGreen UK
  - Ascona Group
  - Asda
