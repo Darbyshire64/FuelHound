@@ -228,10 +228,10 @@ def privacy_policy():
 @app.route('/terms-of-service')
 def terms_of_service():
     return render_template('terms-of-service.html')
-@app.route('/api/doc')
+@app.route('/api/docs')
 def api():
     return render_template('api.html')
-@app.route('/api/samplejson')
+@app.route('/api/docs/samplejson')
 def samplejson():
     return render_template('sampleresponse.json')
 
