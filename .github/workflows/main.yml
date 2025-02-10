@@ -1,0 +1,33 @@
+name: Update meta.json
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-meta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get latest commit info
+        id: commit_info
+        run: |
+          echo "LATEST_DATE=$(git log -1 --format='%cI')" >> $GITHUB_ENV
+          echo "LATEST_MESSAGE=$(git log -1 --pretty=%B | jq -R -s '.')" >> $GITHUB_ENV
+
+      - name: Update meta.json
+        run: |
+          if [ ! -f meta.json ]; then echo '{}' > meta.json; fi
+          jq ".last_commit_date = \"$LATEST_DATE\" | .last_commit_message = $LATEST_MESSAGE" meta.json > meta.tmp.json
+          mv meta.tmp.json meta.json
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add meta.json
+          git commit -m "Update meta.json with latest commit info" || exit 0
+          git push
