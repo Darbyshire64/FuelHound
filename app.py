@@ -117,6 +117,7 @@ def get_cheapest_fuel(postcode):
         ("Asda", getdata.GetData.Asda),
         ("BP", getdata.GetData.BP),
         ("Esso Tesco", getdata.GetData.ET),
+        ("Tesco", getdata.GetData.Tesco),
         ("Jet", getdata.GetData.Jet),
         ("Karen", getdata.GetData.Karen),
         ("Morrisons", getdata.GetData.Morisons),
