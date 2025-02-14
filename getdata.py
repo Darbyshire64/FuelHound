@@ -147,7 +147,7 @@ class GetData:
     def Tesco():
         url = "https://www.tesco.com/fuel_prices/fuel_prices_data.json"
         #Spoof The API into thinking the codes a browser"
-        headers = "{Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0}"
+        headers = {Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0}
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             data = response.json()
