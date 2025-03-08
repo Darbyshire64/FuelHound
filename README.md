@@ -5,9 +5,10 @@ A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The 
  - Asda
  - BP
  - Esso Tesco
+ - Tesco UK
  - JET Retail UK
  - Karan Retail Ltd
- - Morrisons - Morrisons Apears To Be Offline The Cause is Unkown. The Software still requests to morrisons this causes the self tests to report the api test as failed please ingore this
+ - Morrisons - Limited Data
  - Moto
  - Motor Fuel Group
  - Rontec
@@ -15,6 +16,8 @@ A Terminal & Web Based Applet To Search For The Cheapest Fuel Prices Across The 
  - SGN
  - Shell
 
+# Statement about Accuracy of the Data Qouted From https://www.gov.uk/guidance/access-fuel-price-data
+We recognise the interim scheme is limited and there will sometimes be a delay between the setting of prices, the publication of price data, and the prices being available in third-party apps. Customers should always check the price displayed at the forecourt before purchasing road fuel.
 
 # IMPORTANT
 

@@ -144,3 +144,13 @@ class GetData:
             return json.dumps(data, indent=4)
         else:
             return None
+    def Tesco():
+        url = "https://www.tesco.com/fuel_prices/fuel_prices_data.json"
+        #Spoof The API into thinking the codes a browser"
+        headers = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0(X11; Ubuntu; Linux aarch64; rv:109.0) Gecko/20100101 Firefox/120.0'}
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            return json.dumps(data, indent=4)
+        else:
+            return None
