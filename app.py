@@ -112,17 +112,17 @@ def home():
 #Returns the Cheapest Fuel Prices
 @app.route('/api/cheapest/postcode/<postcode>', methods=['GET'])
 def cheapest_fuel(postcode):
-    price = get_cheapest_fuel(postcode)
+    price = datahandaling.get_cheapest_fuel(postcode)
     return jsonify(price)
 #Returns All Local Fuel Prices
 @app.route('/api/cheapestlocal/postcode/<postcode>', methods=['GET'])
 def cheapest_local(postcode):
-    price = cheapest_local_fuel(postcode)
+    price = datahandaling.cheapest_local_fuel(postcode)
     return jsonify(price)
 # Returns All Fuel Prices
 @app.route('/api/alldata', methods=['GET'])
 def all_fuel_stations():
-    price = get_all_fuel_stations()
+    price = datahandaling.get_all_fuel_stations()
     return jsonify(price)
 
 # -- Web Handeling---
