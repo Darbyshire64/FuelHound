@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Fuel Hound</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/svg+xml" href="https://lawri.hackclub.app/static/favicon.svg" />
-	<link rel="shortcut icon" href="https://lawri.hackclub.app/static/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="https://lawri.hackclub.app/static/apple-touch-icon.png" />
-	<meta name="apple-mobile-web-app-title" content="FuelHound" />
-	<link rel="manifest" href="https://lawri.hackclub.app/static/site.webmanifest"
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="https://lawri.hackclub.app/static/favicon.svg" />
+        <link rel="shortcut icon" href="https://lawri.hackclub.app/static/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="https://lawri.hackclub.app/static/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="FuelHound" />
+        <link rel="manifest" href="https://lawri.hackclub.app/static/site.webmanifest">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -22,21 +22,31 @@
             <li><a href="/api/docs/">API </a></li>
         </ul>
     </nav>
-
     <div class="container">
         <h1>API Documentation</h1>
-        <p>The Fuel Hound API allows you to access fuel price data programmatically. You can use this data to build your own applications, websites, or services that require fuel price information.</p>
-        <h1>Getting Started</h1>
+        <p>The Fuel Hound API allows you to access fuel price data programmatically. You can use this data to build your own applications, websites, or services that require fuel price information. Please note the app is still verry primitave and i have yet >
+        <h2>Getting the Cheapest Fuel</h2>
         <p>Currently the FuelHound API is Limited and Only allows for reciving the cheapest stations and averages. Its Quite Simple To Use All you need to do is send a Get Request to</P>
         <code>https://lawri.hackclub.app/api/cheapest/postcode/RG14</code>
         <p>Replace RG14 With the actual first half of your postcode. response should be a json request simlar to the one availble at <code><a href="https://lawri.hackclub.app/api/docs/samplejson">https://lawri.hackclub.app/api/samplejson</a></code></p>
+        <h2>Getting All Local Fuel Prices</h2>
+        <p>To Request All Local Fuel Prices. Send A Requst to the following EndPoint like the example bellow. ensure you replace RG14 with your own Firsthalf of your postcode.</P>
+        <code>https://lawri.hackclub.app/api/local/postcode/RG14</code>
+        <p>This Will Return a json Output with all local fuel prices for every station with a matching postcode. there is no sorting or averages involved</p>
+        <h2>Getting All National Fuel Prices</h2>
+        <p>To Request All Local Fuel Prices. Send A Requst to the following EndPoint like the example bellow.</P>
+        <code>https://lawri.hackclub.app/api/national</code>
+        <p>This Will Return a json Output with all national fuel prices for every station in the country. </p>
+        <h2>Submiting FeedBack</h2>
+        <p>If you have some FeedBack for me please submit a POST request to the the following</p>
+        <code>https://lawri.hackclub.app/api/feedback/[message]</code>
+        <p>Replace [message] with your message. This will be sent to me and I will try to make the adjustments you suggest. The Url dosent accept spaces please just type your message without spaces and i will then interpet this myself.</p>
     </div>
-
      <!-- Footer -->
      <footer>
         <div class="footer-content">
             <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
-            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a Sub Project of <a href="https://dynapound.com">DynaPound</a> </P>
+            <P>Lawri Darbyshire is a  Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a Sub Project of <a href="https://dynapound.com">DynaPound</a> </P>
             <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
         </div>
     </footer>
