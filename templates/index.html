@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Hound</title>
+    <title>Privacy Policy - Fuel Hound</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="https://lawri.hackclub.app/static/favicon.svg" />
@@ -19,84 +19,36 @@
             <li><a href="/">Home</a></li>
             <li><a href="/privacy-policy">Privacy Policy</a></li>
             <li><a href="/terms-of-service">Terms of Service</a></li>
-            <li><a href="/api/docs">API </a></li>
+            <li><a href="/api/docs/">API </a></li>
         </ul>
     </nav>
-    <div class="announcement">
-        <p>Morrisons Is Currently Offline&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a>Cause Unkown></a></p>
-    </div>
+
     <div class="container">
-        <header>
-            <h1>Fuel Hound</h1>
-            <p>Find the cheapest fuel near you quickly and securely!</p>
-        </header>
-        <!-- Form Section -->
-        <form method="POST" action="/" id="postcode-form">
-            <label for="postcode-input">Enter your postcode (eg, RG14 7HS):</label>
-            <br>
-            <input type="text" name="postcode" id="postcode-input" placeholder="eg, RG14 7HS" value="{{ postcode or '' }}" required>
-            <div>
-                <label>
-                    <input type="checkbox" name="agree" required> 
-                    I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-of-service">Terms of Service</a>.
-                </label>
-            </div>
-            <br>
-            <br>
-            <button type="submit">Find Fuel</button>
-        </form>
-        <!-- Spinner -->
-        <div class="spinner" id="loading-spinner"></div>
-        <!-- Error Message -->
-
-        {% if error %}
-            <div class="error">{{ error }}</div>
-        {% endif %}
-
-        <!-- Results Section -->
-        {% if prices %}
-            <div id="results">
-                <h2>Results for Postcode: {{ postcode }}</h2>
-                <h3>Cheapest Stations</h3>
-                <ul>
-                    {% for fuel_type, station in prices.cheapest_stations.items() %}
-                        <li>
-                            <strong>{{ fuel_type }}:</strong>
-                            {% if station %}
-                                {{ station.brand }}, {{ station.address }}, {{ station.postcode }} - £{{ "%.2f"|format(station.price) }}/litre 
-                                (<a href="{{ station.google_maps_link }}" target="_blank">Directions</a>)
-                            {% else %}
-                                No station found.
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-                <h3>Average Prices</h3>
-                <p><strong>Local:</strong></p>
-                    <p>     E10(Unleaded): £{{ "%.2f"|format(prices.average_prices.local.E10) if prices.average_prices.local.E10 else "N/A" }}/litre</p> 
-                    <p>     E5(Premium Unleaded): £{{ "%.2f"|format(prices.average_prices.local.E5) if prices.average_prices.local.E5 else "N/A" }}/litre</p>
-                    <p>     B7(Diesil): £{{ "%.2f"|format(prices.average_prices.local.B7) if prices.average_prices.local.B7 else "N/A" }}/litre</p>
-                <p><strong>National:</strong></p>
-                    <p>     E10(Unleaded): £{{ "%.2f"|format(prices.average_prices.national.E10) if prices.average_prices.national.E10 else "N/A" }}/litre</p>
-                    <p>     E5(Premium Unleaded): £{{ "%.2f"|format(prices.average_prices.national.E5) if prices.average_prices.national.E5 else "N/A" }}/litre</p>
-                    <p>     B7(Diesel): £{{ "%.2f"|format(prices.average_prices.national.B7) if prices.average_prices.national.B7 else "N/A" }}/litre</p>
-            </div>
-        {% endif %}
+        <h1>API Documentation</h1>
+        <p>The Fuel Hound API allows you to access fuel price data programmatically. You can use this data to build your own applications, websites, or services that require fuel price information. Please note the app is still verry primitave and i have yet to write full documentation.</p>
+        <h2>Getting the Cheapest Fuel</h2>
+        <p>Currently the FuelHound API is Limited and Only allows for reciving the cheapest stations and averages. Its Quite Simple To Use All you need to do is send a Get Request to</P>
+        <code>https://lawri.hackclub.app/api/cheapest/postcode/RG14</code>
+        <p>Replace RG14 With the actual first half of your postcode. response should be a json request simlar to the one availble at <code><a href="https://lawri.hackclub.app/api/docs/samplejson">https://lawri.hackclub.app/api/samplejson</a></code></p>
+        <h2>Getting All Local Fuel Prices</h2>
+        <p>To Request All Local Fuel Prices. Send A Requst to the following EndPoint like the example bellow. ensure you replace RG14 with your own Firsthalf of your postcode.</P>
+        <code>https://lawri.hackclub.app/api/local/postcode/RG14</code>
+        <p>This Will Return a json Output with all local fuel prices for every station with a matching postcode. there is no sorting or averages involved</p>
+        <h2>Getting All National Fuel Prices</h2>
+        <p>To Request All Local Fuel Prices. Send A Requst to the following EndPoint like the example bellow.</P>
+        <code>https://lawri.hackclub.app/api/national</code>
+        <p>This Will Return a json Output with all national fuel prices for every station in the country. </p>
+        <h2>Submiting FeedBack</h2>
+        <p>If you have some FeedBack for me please submit a POST request to the the following</p>
+        <code>https://lawri.hackclub.app/api/feedback/[message]</code>
+        <p>Replace [message] with your message. This will be sent to me and I will try to make the adjustments you suggest. The Url dosent accept spaces please just type your message without spaces and i will then interpet this myself.</p>
     </div>
-    <script>
-        const form = document.getElementById('postcode-form');
-        const spinner = document.getElementById('loading-spinner');
 
-        form.addEventListener('submit', () => {
-            spinner.style.display = 'block'; // Show spinner
-            form.classList.add('loading'); // Add loading state
-        });
-    </script>
-    <!-- Footer -->
-    <footer>
+     <!-- Footer -->
+     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Fuel Hound Owned By Lawri Darbyshire. All rights reserved.</p>
-            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a  SubProject of <a href="https://dynapound.com">DynaPound</a> </P>
+            <P>Lawri Darbyshire is A Member Of the <a href="https://dynapound.com">DynaPound</a> Open Source Project. This Project is a Sub Project of <a href="https://dynapound.com">DynaPound</a> </P>
             <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a></p>
         </div>
     </footer>
