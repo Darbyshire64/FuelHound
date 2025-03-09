@@ -1,4 +1,5 @@
 import getdata
+import json
 
 def extract_outward_code(postcode):
     """
@@ -31,7 +32,6 @@ def get_cheapest_fuel(postcode):
         ("Asda", getdata.GetData.Asda),
         ("BP", getdata.GetData.BP),
         ("Esso Tesco", getdata.GetData.ET),
-        ("Tesco", getdata.GetData.Tesco),
         ("Jet", getdata.GetData.Jet),
         ("Karen", getdata.GetData.Karen),
         ("Morrisons", getdata.GetData.Morisons),
@@ -120,7 +120,6 @@ def cheapest_local_fuel(postcode):
         ("Ascona", getdata.GetData.Ascona),
         ("Asda", getdata.GetData.Asda),
         ("BP", getdata.GetData.BP),
-        ("Tesco", getdata.GetData.Tesco),
         ("Esso Tesco", getdata.GetData.ET),
         ("Jet", getdata.GetData.Jet),
         ("Karen", getdata.GetData.Karen),
@@ -193,7 +192,6 @@ def get_all_fuel_stations():
         ("Asda", getdata.GetData.Asda),
         ("BP", getdata.GetData.BP),
         ("Esso Tesco", getdata.GetData.ET),
-        ("Tesco", getdata.GetData.Tesco),
         ("Jet", getdata.GetData.Jet),
         ("Karen", getdata.GetData.Karen),
         ("Morrisons", getdata.GetData.Morisons),
