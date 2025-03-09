@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, session, jsonify
-import getdata 
-import json 
+import datahandaling 
+import getdata
+import json
 import os
 
-#Updated With New announcment Data
-
-# Run Self Tests
+# Run Self Tests To ensure the Code can Opperate
 print("Checking Dependecies")
 if getdata:
     print("Getdata module is installed")
@@ -82,239 +81,15 @@ except:
     print("Bugs may occur")
     print("SOFTWARE IS UNSTABLE DO NOT USE")
 
+
+#Define and Run Flask App
 app = Flask(__name__)
 app.secret_key = 'TeeheheNotGivingUThis'
 
-
-
-def extract_outward_code(postcode):
-    """
-    Extracts the outward code (first segment) from a full postcode.
-
-    Args:
-        postcode (str): The full UK postcode, e.g., 'RG14 5PA'.
-
-    Returns:
-        str: The outward code, e.g., 'RG14', or None if the input is invalid.
-    """
-    if not postcode:
-        return None
-
-    # Split by space and return the first segment
-    parts = postcode.strip().upper().split(" ")
-    return parts[0] if parts else None
-
-def get_cheapest_fuel(postcode):
-    totalping = 0
-    successping = 0
-    match = 0
-    postcode = extract_outward_code(postcode)
-    # List of fuel providers and their methods
-    fuel_providers = [
-        ("Sainsbury's", getdata.GetData.Sainsburys),
-        ("Shell", getdata.GetData.Shell),
-        ("AppleGreen", getdata.GetData.AppleGreen),
-        ("Ascona", getdata.GetData.Ascona),
-        ("Asda", getdata.GetData.Asda),
-        ("BP", getdata.GetData.BP),
-        ("Esso Tesco", getdata.GetData.ET),
-        ("Tesco", getdata.GetData.Tesco),
-        ("Jet", getdata.GetData.Jet),
-        ("Karen", getdata.GetData.Karen),
-        ("Morrisons", getdata.GetData.Morisons),
-        ("Moto", getdata.GetData.Moto),
-        ("Motor", getdata.GetData.Motor),
-        ("Rontec", getdata.GetData.RonTec),
-        ("SGN", getdata.GetData.SGN),
-    ]
-
-    matching_stations = []
-
-    for name, get_method in fuel_providers:
-        data = get_method()
-        totalping += 1
-        if data is not None:
-            processed_data = json.loads(data)
-            for site in processed_data.get('stations', []):
-                site_postal = site['postcode'].split(' ')[0]
-                if site_postal == postcode:
-                    matching_stations.append(site)
-                    match += 1
-            successping += 1
-
-    # Find the cheapest station for each fuel type
-    cheapest_stations = {'E10': None, 'E5': None, 'B7': None}
-    cheapest_prices = {'E10': float('inf'), 'E5': float('inf'), 'B7': float('inf')}
-
-    for station in matching_stations:
-        for fuel_type in ['E10', 'E5', 'B7']:
-            if fuel_type in station['prices']:
-                # Convert prices from pennies to pounds
-                price_in_pounds = station['prices'][fuel_type] / 100
-                if price_in_pounds < cheapest_prices[fuel_type]:
-                    cheapest_prices[fuel_type] = price_in_pounds
-                    cheapest_stations[fuel_type] = station
-
-    # Calculate average prices
-    local_prices = {'E10': [], 'E5': [], 'B7': []}
-    national_prices = {'E10': [], 'E5': [], 'B7': []}
-
-    for station in matching_stations:
-        for fuel_type in ['E10', 'E5', 'B7']:
-            if fuel_type in station['prices']:
-                local_prices[fuel_type].append(station['prices'][fuel_type] / 100)
-
-    for station in processed_data.get('stations', []):
-        for fuel_type in ['E10', 'E5', 'B7']:
-            if fuel_type in station['prices']:
-                national_prices[fuel_type].append(station['prices'][fuel_type] / 100)
-
-    local_avg_prices = {fuel_type: (sum(prices) / len(prices)) if prices else None for fuel_type, prices in local_prices.items()}
-    national_avg_prices = {fuel_type: (sum(prices) / len(prices)) if prices else None for fuel_type, prices in national_prices.items()}
-
-    # Prepare the JSON response
-    response = {
-        "total_companies": totalping,
-        "successful_requests": successping,
-        "matching_stations_found": match,
-        "cheapest_stations": {
-            fuel_type: {
-                "brand": station["brand"],
-                "address": station["address"],
-                "postcode": station["postcode"],
-                "price": cheapest_prices[fuel_type],  # Price already in pounds
-                "google_maps_link": f"https://www.google.com/maps/dir/?api=1&destination={station['location']['latitude']},{station['location']['longitude']}",
-            } if station else None
-            for fuel_type, station in cheapest_stations.items()
-        },
-        "average_prices": {
-            "local": local_avg_prices,
-            "national": national_avg_prices,
-        },
-    }
-    return response
-
-def cheapest_local_fuel(postcode):
-    totalping = 0
-    successping = 0
-    match = 0
-    postcode = extract_outward_code(postcode)
-    # List of fuel providers and their methods
-    fuel_providers = [
-        ("Sainsbury's", getdata.GetData.Sainsburys),
-        ("Shell", getdata.GetData.Shell),
-        ("AppleGreen", getdata.GetData.AppleGreen),
-        ("Ascona", getdata.GetData.Ascona),
-        ("Asda", getdata.GetData.Asda),
-        ("BP", getdata.GetData.BP),
-        ("Tesco", getdata.GetData.Tesco),
-        ("Esso Tesco", getdata.GetData.ET),
-        ("Jet", getdata.GetData.Jet),
-        ("Karen", getdata.GetData.Karen),
-        ("Morrisons", getdata.GetData.Morisons),
-        ("Moto", getdata.GetData.Moto),
-        ("Motor", getdata.GetData.Motor),
-        ("Rontec", getdata.GetData.RonTec),
-        ("SGN", getdata.GetData.SGN),
-    ]
-
-    matching_stations = []
-
-    for name, get_method in fuel_providers:
-        data = get_method()
-        totalping += 1
-        if data is not None:
-            processed_data = json.loads(data)
-            for site in processed_data.get('stations', []):
-                site_postal = site['postcode'].split(' ')[0]
-                if site_postal == postcode:
-                    matching_stations.append(site)
-                    match += 1
-            successping += 1
-
-     # Find the cheapest station for each fuel type
-    cheapest_prices = {'E10': float('inf'), 'E5': float('inf'), 'B7': float('inf')}
-
-    for station in matching_stations:
-        for fuel_type in ['E10', 'E5', 'B7']:
-            if fuel_type in station['prices']:
-                # Convert prices from pennies to pounds
-                price_in_pounds = station['prices'][fuel_type] / 100
-                if price_in_pounds < cheapest_prices[fuel_type]:
-                    cheapest_prices[fuel_type] = price_in_pounds
-
-     # Prepare the JSON response
-    response = {
-        "total_companies": totalping,
-        "successful_requests": successping,
-        "matching_stations_found": match,
-        "stations": [
-            {
-                "brand": station["brand"],
-                "address": station["address"],
-                "postcode": station["postcode"],
-                "prices": {
-                    fuel_type: {
-                        "price": station["prices"][fuel_type] / 100,  # Price in pounds
-                        "cheapest": (station["prices"][fuel_type] / 100 == cheapest_prices[fuel_type])
-                    }
-                    for fuel_type in station["prices"]
-                },
-                "google_maps_link": f"https://www.google.com/maps/dir/?api=1&destination={station['location']['latitude']},{station['location']['longitude']}",
-            }
-            for station in matching_stations
-        ],
-    }
-    return response
-
-def get_all_fuel_stations():
-    totalping = 0
-    successping = 0
-
-     # List of fuel providers and their methods
-    fuel_providers = [
-        ("Sainsbury's", getdata.GetData.Sainsburys),
-        ("Shell", getdata.GetData.Shell),
-        ("AppleGreen", getdata.GetData.AppleGreen),
-        ("Ascona", getdata.GetData.Ascona),
-        ("Asda", getdata.GetData.Asda),
-        ("BP", getdata.GetData.BP),
-        ("Esso Tesco", getdata.GetData.ET),
-        ("Tesco", getdata.GetData.Tesco),
-        ("Jet", getdata.GetData.Jet),
-        ("Karen", getdata.GetData.Karen),
-        ("Morrisons", getdata.GetData.Morisons),
-        ("Moto", getdata.GetData.Moto),
-        ("Motor", getdata.GetData.Motor),
-        ("Rontec", getdata.GetData.RonTec),
-        ("SGN", getdata.GetData.SGN),
-    ]
-
-    all_stations = []
-
-    for name, get_method in fuel_providers:
-        data = get_method()
-        totalping += 1
-        if data is not None:
-            processed_data = json.loads(data)
-            for site in processed_data.get('stations', []):
-                all_stations.append(site)
-            successping += 1
-
-     # Prepare the JSON response
-    response = {
-        "total_companies": totalping,
-        "successful_requests": successping,
-        "all_stations": all_stations,
-    }
-    return response
-
-
+# Apps Main Function
 @app.route("/", methods=["GET", "POST"])
 def home():
-    # Always clear session data on GET request (i.e., on refresh)
-    session.clear()  # Clears all session data
-    
+
     # Check if the form is being submitted
     if request.method == "POST":
         postcode = request.form.get("postcode")
@@ -322,7 +97,8 @@ def home():
         if not agree:
             return render_template("index.html", error="You must agree to the Privacy Policy and Terms of Service.")
         
-        prices = get_cheapest_fuel(postcode)
+        #Call Cheapest Fuel
+        prices = datahandaling.get_cheapest_fuel(postcode)
         
         # Store the postcode and prices in the session for the user
         session['postcode'] = postcode
@@ -332,21 +108,24 @@ def home():
     return render_template("index.html")
 
 
-#Api
+# -- API --
+#Returns the Cheapest Fuel Prices
 @app.route('/api/cheapest/postcode/<postcode>', methods=['GET'])
 def cheapest_fuel(postcode):
     price = get_cheapest_fuel(postcode)
     return jsonify(price)
+#Returns All Local Fuel Prices
 @app.route('/api/cheapestlocal/postcode/<postcode>', methods=['GET'])
 def cheapest_local(postcode):
     price = cheapest_local_fuel(postcode)
     return jsonify(price)
+# Returns All Fuel Prices
 @app.route('/api/alldata', methods=['GET'])
 def all_fuel_stations():
     price = get_all_fuel_stations()
     return jsonify(price)
 
-
+# -- Web Handeling---
 @app.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy-policy.html')
@@ -360,6 +139,7 @@ def api():
 def samplejson():
     return render_template('sampleresponse.json')
 
+# Deploy App 
 if __name__ == "__main__":
-    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() in ['true', '1', 't']
+    debug_mode = False
     app.run(debug=debug_mode, port=44751)
