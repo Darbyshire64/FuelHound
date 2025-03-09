@@ -73,12 +73,12 @@ def get_cheapest_fuel(postcode):
     national_prices = {'E10': [], 'E5': [], 'B7': []}
 
     for station in matching_stations:
-        for fuel_type in ['E10', 'E5', 'B7']:
+        for fuel_type in ['E10', 'E5', 'B7', 'SDV']:
             if fuel_type in station['prices']:
                 local_prices[fuel_type].append(station['prices'][fuel_type] / 100)
 
     for station in processed_data.get('stations', []):
-        for fuel_type in ['E10', 'E5', 'B7']:
+        for fuel_type in ['E10', 'E5', 'B7', 'SDV']:
             if fuel_type in station['prices']:
                 national_prices[fuel_type].append(station['prices'][fuel_type] / 100)
 
@@ -145,10 +145,10 @@ def cheapest_local_fuel(postcode):
             successping += 1
 
      # Find the cheapest station for each fuel type
-    cheapest_prices = {'E10': float('inf'), 'E5': float('inf'), 'B7': float('inf')}
+    cheapest_prices = {'E10': float('inf'), 'E5': float('inf'), 'B7': float('inf'), 'SDV': float('inf')}
 
     for station in matching_stations:
-        for fuel_type in ['E10', 'E5', 'B7']:
+        for fuel_type in ['E10', 'E5', 'B7', 'SDV']:
             if fuel_type in station['prices']:
                 # Convert prices from pennies to pounds
                 price_in_pounds = station['prices'][fuel_type] / 100

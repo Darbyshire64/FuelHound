@@ -3,6 +3,8 @@ import math
 import time
 import os
 import selftests
+import datahandaling
+import json
 
 class Commands:
     valid_commands = ["help"]
@@ -62,7 +64,25 @@ class Commands:
     @staticmethod
     def Test():
         selftests.Test()
-    
+    @staticmethod
+    def National():
+        results = datahandaling.get_all_fuel_stations()
+        try:
+            with open('national_fuel.json', 'w', encoding='utf-8') as f:
+                json.dump(results, f, ensure_ascii=False, indent=4)
+        except:
+            print("Failed To Write File")
+        print("File Written To national_fuel.json")
+    @staticmethod
+    def Local():
+        postcode = input("Enter Your Postcode: ")
+        results= datahandaling.cheapest_local_fuel(postcode)
+         try:
+            with open('local_fuel.json', 'w', encoding='utf-8') as f:
+                json.dump(results, f, ensure_ascii=False, indent=4)
+        except:
+            print("Failed To Write File")
+        print("File Written To local_fuel.json")
 class CMD:
     @staticmethod
     def Prompt():
@@ -79,7 +99,10 @@ class CMD:
                 Commands.Special()
             if prompt.lower() == 'test':
                 Commands.Test()
-                print("Debug 1")
+            if prompt.lower() == 'national':
+                Commands.National()
+            if prompt.lower() == 'local':
+                Commands.Local()
 
 print("Welcome to the FuelHound Command Line. Enter 'help' to get started.")
 print("This is an offline service that does not require a connection to Fuel Hound servers. Instead, it fetches data directly from the price servers.")
