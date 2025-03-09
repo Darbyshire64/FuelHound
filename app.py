@@ -138,6 +138,31 @@ def api():
 def samplejson():
     return render_template('sampleresponse.json')
 
+# --Hanndel Feed back
+feedback = 0
+@app.route("/api/feedback", methods=["POST"])
+def submit_feedback(message):
+    if not message:
+        return jsonify({"status": "error", "message": "Message cannot be empty"}), 400
+    
+    feedback_data = {
+        "message": message
+    }
+    
+
+    feedback = feedback+1
+    if not os.path.exists("feedback{feedback}.json"):
+        with open("feedback{feedback}.json", "w") as file:
+            json.dump([], file, indent=4)
+    
+    with open("feedback{feedback}.json", "r+") as file:
+        data = json.load(file)
+        data.append(feedback_data)
+        file.seek(0)
+        json.dump(data, file, indent=4)
+    
+    return jsonify({"status": "success", "message": "Feedback submitted successfully"})
+
 # Deploy App 
 if __name__ == "__main__":
     debug_mode = False
