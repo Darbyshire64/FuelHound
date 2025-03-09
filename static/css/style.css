@@ -22,6 +22,18 @@ body {
   align-items: center; /* Center content horizontally */
 }
 
+footer {
+  background-color: #222;
+  padding: 20px;
+  border-top: 2px solid white;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
 nav {
   background: rgba(51, 51, 51, 0.9);
   border-bottom: 2px solid #ecf0f1;
@@ -31,12 +43,6 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  animation: slideDown 0.5s ease-in-out;
-}
-
-@keyframes slideDown {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(0); }
 }
 
 nav ul {
@@ -67,11 +73,12 @@ nav ul li a {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid white;
   width: 100%;
   max-width: 500px;
   margin-top: 80px; /* Added space to avoid content hidden behind navbar */
   margin-bottom: 60px;
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 0.045s ease-in-out;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -174,7 +181,7 @@ button:hover {
   text-align: center;
   width: 100%;
   background: black;
-  color: white;
+  color: indianred;
   font-family: 'Inter', sans-serif;
   font-size: 0.8em;
 }
