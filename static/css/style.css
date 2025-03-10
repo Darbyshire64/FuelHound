@@ -24,6 +24,7 @@ body {
 
 footer {
   background-color: #222;
+  opacity: 0.9;
   padding: 20px;
   border-top: 2px solid white;
   width: 100%;
